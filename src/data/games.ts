@@ -5,6 +5,7 @@ export interface Game {
   category: string;
   thumbnail: string;
   embedUrl: string;
+  fallbackUrl?: string;
   featured?: boolean;
 }
 
@@ -26,7 +27,7 @@ export const games: Game[] = [
     description: "Battle it out in this crazy multiplayer kart game!",
     category: "Racing",
     thumbnail: "https://images.unsplash.com/photo-1511882150382-421056c89033?w=400&h=300&fit=crop",
-    embedUrl: "https://smashkarts.io",
+    embedUrl: "https://smashkartsunblocked.github.io/",
     featured: true,
   },
   {
@@ -35,7 +36,8 @@ export const games: Game[] = [
     description: "Ride your sled down snowy slopes, dodge obstacles!",
     category: "Racing",
     thumbnail: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop",
-    embedUrl: "https://snowrider3d.io",
+    embedUrl: "https://snow-rider3d.github.io/file/",
+    fallbackUrl: "https://snow-rider3d.github.io/",
     featured: true,
   },
   {
@@ -44,7 +46,18 @@ export const games: Game[] = [
     description: "Match and blast colorful blocks in this addictive puzzle!",
     category: "Puzzle",
     thumbnail: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=300&fit=crop",
-    embedUrl: "https://blockblast.io",
+    embedUrl: "https://block-blast-puzzle.github.io/file/",
+    fallbackUrl: "https://block-blast-puzzle.github.io/",
+    featured: true,
+  },
+  {
+    id: "geometry-dash",
+    title: "Geometry Dash",
+    description: "Jump, fly and flip through dangerous passages!",
+    category: "Arcade",
+    thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=300&fit=crop",
+    embedUrl: "https://77pen.github.io/p8/geometry-dash/",
+    fallbackUrl: "https://dashgeometrydash.github.io/",
     featured: true,
   },
   {
@@ -53,7 +66,7 @@ export const games: Game[] = [
     description: "Roll the ball down the slope at high speed!",
     category: "Arcade",
     thumbnail: "https://images.unsplash.com/photo-1614294149010-950b698f72c0?w=400&h=300&fit=crop",
-    embedUrl: "https://slope-game.github.io/",
+    embedUrl: "https://slope3unblocked.github.io/",
   },
   {
     id: "retro-bowl",
@@ -61,7 +74,7 @@ export const games: Game[] = [
     description: "Manage your own football team in this retro-styled game!",
     category: "Sports",
     thumbnail: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=400&h=300&fit=crop",
-    embedUrl: "https://retrobowl.me",
+    embedUrl: "https://retrobowl76game.github.io/",
   },
   {
     id: "1v1-lol",
@@ -69,7 +82,8 @@ export const games: Game[] = [
     description: "Build and shoot your way to victory in 1v1 battles!",
     category: "Shooting",
     thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=300&fit=crop",
-    embedUrl: "https://1v1.lol",
+    embedUrl: "https://1v1-lol-unblockedgame.github.io/",
+    fallbackUrl: "https://1v1.lol",
   },
   {
     id: "subway-surfers",
@@ -77,7 +91,7 @@ export const games: Game[] = [
     description: "Run, dodge, and surf through the subway endlessly!",
     category: "Arcade",
     thumbnail: "https://images.unsplash.com/photo-1597075681947-d0e2fdd1f959?w=400&h=300&fit=crop",
-    embedUrl: "https://subwaysurf.io",
+    embedUrl: "https://subway-surfers-unblock.github.io/",
   },
   {
     id: "drift-hunters",
@@ -86,14 +100,6 @@ export const games: Game[] = [
     category: "Racing",
     thumbnail: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&h=300&fit=crop",
     embedUrl: "https://drifthunters.io",
-  },
-  {
-    id: "crossy-road",
-    title: "Crossy Road",
-    description: "Cross the road without getting hit!",
-    category: "Arcade",
-    thumbnail: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop",
-    embedUrl: "https://crossyroad.io",
   },
   {
     id: "moto-x3m",
@@ -110,14 +116,6 @@ export const games: Game[] = [
     category: "Sports",
     thumbnail: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&h=300&fit=crop",
     embedUrl: "https://basketballstars.io",
-  },
-  {
-    id: "temple-run",
-    title: "Temple Run 2",
-    description: "Run through ancient temples and avoid traps!",
-    category: "Adventure",
-    thumbnail: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=300&fit=crop",
-    embedUrl: "https://templerun2.io",
   },
   {
     id: "tunnel-rush",
@@ -144,14 +142,6 @@ export const games: Game[] = [
     embedUrl: "https://freepacman.org",
   },
   {
-    id: "happy-wheels",
-    title: "Happy Wheels",
-    description: "Crazy ragdoll physics racing game!",
-    category: "Action",
-    thumbnail: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&h=300&fit=crop",
-    embedUrl: "https://happywheels.io",
-  },
-  {
     id: "run-3",
     title: "Run 3",
     description: "Run through space tunnels in this endless runner!",
@@ -166,5 +156,21 @@ export const games: Game[] = [
     category: "Action",
     thumbnail: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=400&h=300&fit=crop",
     embedUrl: "https://paper-io.com",
+  },
+  {
+    id: "happy-wheels",
+    title: "Happy Wheels",
+    description: "Crazy ragdoll physics racing game!",
+    category: "Action",
+    thumbnail: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&h=300&fit=crop",
+    embedUrl: "https://happywheels.io",
+  },
+  {
+    id: "crossy-road",
+    title: "Crossy Road",
+    description: "Cross the road without getting hit!",
+    category: "Arcade",
+    thumbnail: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop",
+    embedUrl: "https://crossyroad.io",
   },
 ];
