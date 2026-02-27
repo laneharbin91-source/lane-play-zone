@@ -61,6 +61,16 @@ export const games: Game[] = [
     featured: true,
   },
   {
+    id: "drift-boss",
+    title: "Drift Boss",
+    description: "Master one-button drifting on an endless twisting road!",
+    category: "Racing",
+    thumbnail: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=300&fit=crop",
+    embedUrl: "https://driftbossonline.github.io/file/",
+    fallbackUrl: "https://driftboss.cloud/",
+    featured: true,
+  },
+  {
     id: "slope",
     title: "Slope",
     description: "Roll the ball down the slope at high speed!",
