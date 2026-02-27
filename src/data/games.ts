@@ -1,0 +1,170 @@
+export interface Game {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  thumbnail: string;
+  embedUrl: string;
+  featured?: boolean;
+}
+
+export const categories = [
+  "All",
+  "Action",
+  "Racing",
+  "Puzzle",
+  "Sports",
+  "Arcade",
+  "Shooting",
+  "Adventure",
+] as const;
+
+export const games: Game[] = [
+  {
+    id: "smash-karts",
+    title: "Smash Karts",
+    description: "Battle it out in this crazy multiplayer kart game!",
+    category: "Racing",
+    thumbnail: "https://images.unsplash.com/photo-1511882150382-421056c89033?w=400&h=300&fit=crop",
+    embedUrl: "https://smashkarts.io",
+    featured: true,
+  },
+  {
+    id: "snow-rider",
+    title: "Snow Rider 3D",
+    description: "Ride your sled down snowy slopes, dodge obstacles!",
+    category: "Racing",
+    thumbnail: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop",
+    embedUrl: "https://snowrider3d.io",
+    featured: true,
+  },
+  {
+    id: "block-blast",
+    title: "Block Blast",
+    description: "Match and blast colorful blocks in this addictive puzzle!",
+    category: "Puzzle",
+    thumbnail: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=300&fit=crop",
+    embedUrl: "https://blockblast.io",
+    featured: true,
+  },
+  {
+    id: "slope",
+    title: "Slope",
+    description: "Roll the ball down the slope at high speed!",
+    category: "Arcade",
+    thumbnail: "https://images.unsplash.com/photo-1614294149010-950b698f72c0?w=400&h=300&fit=crop",
+    embedUrl: "https://slope-game.github.io/",
+  },
+  {
+    id: "retro-bowl",
+    title: "Retro Bowl",
+    description: "Manage your own football team in this retro-styled game!",
+    category: "Sports",
+    thumbnail: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=400&h=300&fit=crop",
+    embedUrl: "https://retrobowl.me",
+  },
+  {
+    id: "1v1-lol",
+    title: "1v1.LOL",
+    description: "Build and shoot your way to victory in 1v1 battles!",
+    category: "Shooting",
+    thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=300&fit=crop",
+    embedUrl: "https://1v1.lol",
+  },
+  {
+    id: "subway-surfers",
+    title: "Subway Surfers",
+    description: "Run, dodge, and surf through the subway endlessly!",
+    category: "Arcade",
+    thumbnail: "https://images.unsplash.com/photo-1597075681947-d0e2fdd1f959?w=400&h=300&fit=crop",
+    embedUrl: "https://subwaysurf.io",
+  },
+  {
+    id: "drift-hunters",
+    title: "Drift Hunters",
+    description: "Master the art of drifting in 3D!",
+    category: "Racing",
+    thumbnail: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&h=300&fit=crop",
+    embedUrl: "https://drifthunters.io",
+  },
+  {
+    id: "crossy-road",
+    title: "Crossy Road",
+    description: "Cross the road without getting hit!",
+    category: "Arcade",
+    thumbnail: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop",
+    embedUrl: "https://crossyroad.io",
+  },
+  {
+    id: "moto-x3m",
+    title: "Moto X3M",
+    description: "Race through extreme motorcycle obstacle courses!",
+    category: "Racing",
+    thumbnail: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop",
+    embedUrl: "https://motox3m.io",
+  },
+  {
+    id: "basketball-stars",
+    title: "Basketball Stars",
+    description: "Shoot hoops and show off your basketball skills!",
+    category: "Sports",
+    thumbnail: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&h=300&fit=crop",
+    embedUrl: "https://basketballstars.io",
+  },
+  {
+    id: "temple-run",
+    title: "Temple Run 2",
+    description: "Run through ancient temples and avoid traps!",
+    category: "Adventure",
+    thumbnail: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=300&fit=crop",
+    embedUrl: "https://templerun2.io",
+  },
+  {
+    id: "tunnel-rush",
+    title: "Tunnel Rush",
+    description: "Fly through a colorful tunnel at blazing speed!",
+    category: "Arcade",
+    thumbnail: "https://images.unsplash.com/photo-1534996858221-380b92700493?w=400&h=300&fit=crop",
+    embedUrl: "https://tunnelrush.github.io/",
+  },
+  {
+    id: "2048",
+    title: "2048",
+    description: "Slide tiles and merge numbers to reach 2048!",
+    category: "Puzzle",
+    thumbnail: "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400&h=300&fit=crop",
+    embedUrl: "https://play2048.co",
+  },
+  {
+    id: "pacman",
+    title: "Pac-Man",
+    description: "Classic arcade — eat dots and avoid ghosts!",
+    category: "Arcade",
+    thumbnail: "https://images.unsplash.com/photo-1579309401389-a2476dddf3d4?w=400&h=300&fit=crop",
+    embedUrl: "https://freepacman.org",
+  },
+  {
+    id: "happy-wheels",
+    title: "Happy Wheels",
+    description: "Crazy ragdoll physics racing game!",
+    category: "Action",
+    thumbnail: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&h=300&fit=crop",
+    embedUrl: "https://happywheels.io",
+  },
+  {
+    id: "run-3",
+    title: "Run 3",
+    description: "Run through space tunnels in this endless runner!",
+    category: "Arcade",
+    thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop",
+    embedUrl: "https://run3.io",
+  },
+  {
+    id: "paper-io",
+    title: "Paper.io 2",
+    description: "Claim territory by drawing shapes!",
+    category: "Action",
+    thumbnail: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=400&h=300&fit=crop",
+    embedUrl: "https://paper-io.com",
+  },
+];
