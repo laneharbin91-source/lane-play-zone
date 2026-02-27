@@ -2,13 +2,43 @@ import { useParams, Link } from "react-router-dom";
 import { games } from "@/data/games";
 import Header from "@/components/Header";
 import GameCard from "@/components/GameCard";
-import { ArrowLeft, Maximize2, ExternalLink } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, Maximize2, ExternalLink, AlertTriangle, RefreshCw } from "lucide-react";
+import { useState, useRef, useCallback } from "react";
 
 const PlayGame = () => {
   const { gameId } = useParams<{ gameId: string }>();
   const game = games.find((g) => g.id === gameId);
-  const [fullscreen, setFullscreen] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [useFallback, setUseFallback] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const currentUrl = useFallback && game?.fallbackUrl ? game.fallbackUrl : game?.embedUrl;
+
+  const handleFullscreen = useCallback(() => {
+    const el = iframeRef.current;
+    if (!el) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      el.requestFullscreen().catch(() => {
+        // Fallback: try the container
+        el.parentElement?.requestFullscreen();
+      });
+    }
+  }, []);
+
+  const handleRetry = useCallback(() => {
+    if (useFallback || !game?.fallbackUrl) {
+      // Reload same URL
+      setLoadError(false);
+      if (iframeRef.current) {
+        iframeRef.current.src = currentUrl || "";
+      }
+    } else {
+      setUseFallback(true);
+      setLoadError(false);
+    }
+  }, [useFallback, game, currentUrl]);
 
   if (!game) {
     return (
@@ -23,31 +53,16 @@ const PlayGame = () => {
 
   const related = games.filter((g) => g.category === game.category && g.id !== game.id).slice(0, 4);
 
-  const toggleFullscreen = () => {
-    const el = document.getElementById("game-frame");
-    if (el) {
-      if (!document.fullscreenElement) {
-        el.requestFullscreen();
-        setFullscreen(true);
-      } else {
-        document.exitFullscreen();
-        setFullscreen(false);
-      }
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       <div className="container mx-auto px-4 py-6">
-        {/* Back nav */}
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" />
           <span>Back to games</span>
         </Link>
 
-        {/* Game title */}
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="font-display text-xl md:text-2xl font-bold text-foreground">{game.title}</h2>
@@ -55,14 +70,14 @@ const PlayGame = () => {
           </div>
           <div className="flex gap-2">
             <button
-              onClick={toggleFullscreen}
+              onClick={handleFullscreen}
               className="p-2 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors text-muted-foreground hover:text-foreground"
               title="Fullscreen"
             >
               <Maximize2 className="w-4 h-4" />
             </button>
             <a
-              href={game.embedUrl}
+              href={currentUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors text-muted-foreground hover:text-foreground"
@@ -74,23 +89,57 @@ const PlayGame = () => {
         </div>
 
         {/* Game frame */}
-        <div id="game-frame" className="game-frame-container overflow-hidden">
+        <div className="game-frame-container overflow-hidden relative">
           <iframe
-            src={game.embedUrl}
+            ref={iframeRef}
+            src={currentUrl}
             title={game.title}
             className="w-full rounded-lg"
-            style={{ height: "70vh", border: "none" }}
-            allow="fullscreen; autoplay; gamepad; microphone"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
-            loading="lazy"
+            style={{ height: "75vh", border: "none" }}
+            allow="fullscreen; autoplay; gamepad; microphone; accelerometer; gyroscope"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
+            allowFullScreen
+            loading="eager"
+            onError={() => setLoadError(true)}
           />
+
+          {loadError && (
+            <div className="absolute inset-0 bg-background/90 flex flex-col items-center justify-center gap-4 rounded-lg">
+              <AlertTriangle className="w-10 h-10 text-neon-orange" />
+              <p className="font-display text-sm text-foreground">Game failed to load</p>
+              <div className="flex gap-3">
+                <button onClick={handleRetry} className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-display">
+                  <RefreshCw className="w-3.5 h-3.5" /> Try Again
+                </button>
+                <a
+                  href={currentUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-display"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" /> Open in New Tab
+                </a>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Tips */}
         <div className="mt-4 bg-secondary/50 rounded-lg p-4 border border-border">
           <p className="text-xs text-muted-foreground">
             <span className="text-primary font-display tracking-wider">TIP:</span>{" "}
-            Click on the game area to start playing. If the game doesn't load, try opening it in a new tab using the button above. Some games may take a moment to load.
+            Click inside the game to activate controls. Use the fullscreen button (⛶) for the best experience.
+            {game.fallbackUrl && !useFallback && (
+              <> Game not loading?{" "}
+                <button onClick={() => { setUseFallback(true); setLoadError(false); }} className="text-primary hover:underline">
+                  Try alternate source
+                </button>
+              </>
+            )}
+            {" "}Or{" "}
+            <a href={currentUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              open in a new tab
+            </a>.
           </p>
         </div>
 
