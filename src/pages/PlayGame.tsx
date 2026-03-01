@@ -91,15 +91,17 @@ const PlayGame = () => {
         {/* Game frame */}
         <div className="game-frame-container overflow-hidden relative">
           <iframe
+            key={currentUrl}
             ref={iframeRef}
             src={currentUrl}
             title={game.title}
             className="w-full rounded-lg"
             style={{ height: "75vh", border: "none" }}
-            allow="fullscreen; autoplay; gamepad; microphone; accelerometer; gyroscope"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
+            allow="fullscreen; autoplay; gamepad; microphone; accelerometer; gyroscope; pointer-lock; clipboard-read; clipboard-write"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-downloads"
             allowFullScreen
             loading="eager"
+            onLoad={() => setLoadError(false)}
             onError={() => setLoadError(true)}
           />
 
