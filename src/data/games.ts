@@ -27,8 +27,8 @@ export const games: Game[] = [
     description: "Parkour across rooftops with lightning-fast reflexes!",
     category: "Action",
     thumbnail: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&h=300&fit=crop",
-    embedUrl: "https://more-games.xyz/cg/play.html?n=rooftop-run&v=20251015140438",
-    fallbackUrl: "https://www.crazygames.com/game/rooftop-run",
+    embedUrl: "https://www.miniplay.com/embed/rooftop-run",
+    fallbackUrl: "https://szhong.4399.com/4399swf//upload_swf/ftp47/gamehwq/20240716/13a/index.htm",
     featured: true,
   },
   {
