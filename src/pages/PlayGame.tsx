@@ -89,14 +89,14 @@ const PlayGame = () => {
         </div>
 
         {/* Game frame */}
-        <div className="game-frame-container overflow-hidden relative">
+        <div className="game-frame-container overflow-hidden relative" id="game-container">
           <iframe
             ref={iframeRef}
             src={currentUrl}
             title={game.title}
             className="w-full rounded-lg"
-            style={{ height: "75vh", border: "none" }}
-            allow="fullscreen; autoplay; gamepad; microphone; accelerometer; gyroscope"
+            style={{ height: "80vh", border: "none" }}
+            allow="fullscreen; autoplay; gamepad; microphone; accelerometer; gyroscope; clipboard-read; clipboard-write"
             sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
             allowFullScreen
             loading="eager"
